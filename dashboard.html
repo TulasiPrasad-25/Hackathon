@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Jobzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <h1>Jobzz</h1>
+            </div>
+            <nav class="user-nav">
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?background=4a6fa5&color=fff&name=User" alt="User" class="user-avatar">
+                    <span id="username-display">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </nav>
+        </header>
+        
+        <main class="dashboard-main">
+            <div class="welcome-banner">
+                <h2>Welcome to Your Career Preparation Hub</h2>
+                <p>Select your experience level to get personalized preparation materials</p>
+            </div>
+            
+            <div class="options-grid">
+                <div class="option-card" id="fresher-card">
+                    <div class="option-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Fresher</h3>
+                    <p>Just starting your career? Get tailored resources for entry-level positions.</p>
+                    <button class="option-btn">Explore</button>
+                </div>
+                
+                <div class="option-card" id="experienced-card">
+                    <div class="option-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Experienced</h3>
+                    <p>1-5 years of experience? Find resources to level up your career.</p>
+                    <button class="option-btn">Explore</button>
+                </div>
+                
+                <div class="option-card" id="expert-card">
+                    <div class="option-icon">
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                    <h3>Expert</h3>
+                    <p>Seasoned professional? Access advanced interview preparation materials.</p>
+                    <button class="option-btn">Explore</button>
+                </div>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <h4>Companies Covered</h4>
+                    <p class="stat-value">120+</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Questions Available</h4>
+                    <p class="stat-value">5,000+</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Users Preparing</h4>
+                    <p class="stat-value">10,000+</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="dashboard-footer">
+            <p>&copy; 2023 JobPrep Portal. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

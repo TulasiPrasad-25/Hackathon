@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details | Jobzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <h1>Jobzz</h1>
+            </div>
+            <nav class="user-nav">
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?background=4a6fa5&color=fff&name=User" alt="User" class="user-avatar">
+                    <span id="username-display">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </nav>
+        </header>
+        
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="fresher.html"><i class="fas fa-user-graduate"></i> Fresher</a></li>
+                    <li><a href="#"><i class="fas fa-user-tie"></i> Experienced</a></li>
+                    <li><a href="#"><i class="fas fa-user-ninja"></i> Expert</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Study Materials</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Progress Tracker</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="dashboard-main expanded">
+            <div class="page-header">
+                <a href="fresher.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Companies</a>
+                <h2 id="company-name">Company Details</h2>
+                <p id="company-description">Loading company information...</p>
+            </div>
+            
+            <div class="company-details">
+                <div class="company-header">
+                    <div class="company-logo-large">
+                        <img id="company-logo-img" src="" alt="Company Logo">
+                    </div>
+                    <div class="company-info">
+                        <div class="company-rating">
+                            <span id="company-rating">0.0</span>
+                            <div class="stars" id="company-stars"></div>
+                            <span id="review-count">0 reviews</span>
+                        </div>
+                        <div class="company-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span id="company-hiring">Hiring: 0</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span id="question-count">Questions: 0</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-users"></i>
+                                <span id="difficulty">Difficulty: Medium</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recruitment-process">
+                    <h3><i class="fas fa-clipboard-list"></i> Recruitment Process</h3>
+                    <div class="rounds-list" id="rounds-list">
+                        <!-- Rounds will be loaded here from JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="company-tips">
+                    <h3><i class="fas fa-lightbulb"></i> Preparation Tips</h3>
+                    <div class="tips-content" id="company-tips">
+                        <!-- Tips will be loaded here from JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get company ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const companyId = urlParams.get('id');
+            
+            if (!companyId) {
+                window.location.href = 'fresher.html';
+                return;
+            }
+            
+            // Load company data
+            fetch('data/companies.json')
+                .then(response => response.json())
+                .then(companies => {
+                    const company = companies.find(c => c.id === companyId);
+                    
+                    if (!company) {
+                        window.location.href = 'fresher.html';
+                        return;
+                    }
+                    
+                    // Display company info
+                    document.getElementById('company-name').textContent = company.name;
+                    document.getElementById('company-description').textContent = company.description;
+                    document.getElementById('company-logo-img').src = company.logo;
+                    document.getElementById('company-logo-img').alt = company.name;
+                    document.getElementById('company-rating').textContent = company.rating;
+                    document.getElementById('review-count').textContent = `${company.reviews} reviews`;
+                    document.getElementById('company-hiring').textContent = `Hiring: ${company.hiring}`;
+                    document.getElementById('question-count').textContent = `Questions: ${company.questions}`;
+                    document.getElementById('difficulty').textContent = `Difficulty: ${company.difficulty}`;
+                    
+                    // Display stars
+                    const starsContainer = document.getElementById('company-stars');
+                    const fullStars = Math.floor(company.rating);
+                    const hasHalfStar = company.rating % 1 >= 0.5;
+                    
+                    starsContainer.innerHTML = '';
+                    for (let i = 0; i < 5; i++) {
+                        if (i < fullStars) {
+                            starsContainer.innerHTML += '<i class="fas fa-star"></i>';
+                        } else if (i === fullStars && hasHalfStar) {
+                            starsContainer.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+                        } else {
+                            starsContainer.innerHTML += '<i class="far fa-star"></i>';
+                        }
+                    }
+                    
+                    // Display rounds
+                    const roundsList = document.getElementById('rounds-list');
+                    company.rounds.forEach(round => {
+                        const roundItem = document.createElement('div');
+                        roundItem.className = 'round-item';
+                        roundItem.setAttribute('data-round', round.id);
+                        
+                        roundItem.innerHTML = `
+                            <div class="round-header">
+                                <h4>${round.name}</h4>
+                                <span class="round-duration">${round.duration}</span>
+                            </div>
+                            <p class="round-description">${round.description}</p>
+                            <div class="round-actions">
+                                <button class="view-questions-btn" data-round="${round.id}">
+                                    View Questions <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        `;
+                        
+                        roundsList.appendChild(roundItem);
+                    });
+                    
+                    // Display tips
+                    const tipsContainer = document.getElementById('company-tips');
+                    company.tips.forEach(tip => {
+                        const tipItem = document.createElement('div');
+                        tipItem.className = 'tip-item';
+                        
+                        tipItem.innerHTML = `
+                            <h4>${tip.title}</h4>
+                            <p>${tip.content}</p>
+                        `;
+                        
+                        tipsContainer.appendChild(tipItem);
+                    });
+                    
+                    // Add click event to view questions buttons
+                    document.querySelectorAll('.view-questions-btn').forEach(btn => {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const roundId = this.getAttribute('data-round');
+                            window.location.href = `rounds.html?company=${companyId}&round=${roundId}`;
+                        });
+                    });
+                });
+            
+            // Display current username
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('username-display').textContent = currentUser.username;
+            }
+            
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

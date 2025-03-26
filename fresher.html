@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresher Preparation | Jobzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <h1>Jobzz</h1>
+            </div>
+            <nav class="user-nav">
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?background=4a6fa5&color=fff&name=User" alt="User" class="user-avatar">
+                    <span id="username-display">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </nav>
+        </header>
+        
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li class="active"><a href="fresher.html"><i class="fas fa-user-graduate"></i> Fresher</a></li>
+                    <li><a href="#"><i class="fas fa-user-tie"></i> Experienced</a></li>
+                    <li><a href="#"><i class="fas fa-user-ninja"></i> Expert</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Study Materials</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Progress Tracker</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="dashboard-main expanded">
+            <div class="page-header">
+                <h2>Fresher Preparation</h2>
+                <p>Select a company to view its recruitment process and interview questions</p>
+            </div>
+            
+            <div class="company-types">
+                <div class="company-type">
+                    <h3><i class="fas fa-building"></i> Service-Based Companies</h3>
+                    <div class="company-list" id="service-companies">
+                        <!-- Companies will be loaded here from JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="company-type">
+                    <h3><i class="fas fa-industry"></i> Product-Based Companies</h3>
+                    <div class="company-list" id="product-companies">
+                        <!-- Companies will be loaded here from JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load companies data
+            fetch('data/companies.json')
+                .then(response => response.json())
+                .then(data => {
+                    const serviceCompanies = data.filter(company => company.type === 'service');
+                    const productCompanies = data.filter(company => company.type === 'product');
+                    
+                    displayCompanies(serviceCompanies, 'service-companies');
+                    displayCompanies(productCompanies, 'product-companies');
+                    
+                    // Add click event to company cards
+                    document.querySelectorAll('.company-card').forEach(card => {
+                        card.addEventListener('click', function() {
+                            const companyId = this.getAttribute('data-id');
+                            window.location.href = `company.html?id=${companyId}`;
+                        });
+                    });
+                });
+            
+            function displayCompanies(companies, containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+                
+                companies.forEach(company => {
+                    const card = document.createElement('div');
+                    card.className = 'company-card';
+                    card.setAttribute('data-id', company.id);
+                    
+                    card.innerHTML = `
+                        <div class="company-logo">
+                            <img src="${company.logo}" alt="${company.name}">
+                        </div>
+                        <div class="company-info">
+                            <h4>${company.name}</h4>
+                            <p>${company.description}</p>
+                            <div class="company-stats">
+                                <span><i class="fas fa-star"></i> ${company.rating}</span>
+                                <span><i class="fas fa-question-circle"></i> ${company.questions} questions</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+            }
+            
+            // Display current username
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('username-display').textContent = currentUser.username;
+            }
+            
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

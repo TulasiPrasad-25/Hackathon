@@ -1,0 +1,462 @@
+[
+    
+    {
+        "id": "tcs",
+        "name": "Tata Consultancy Services",
+        "type": "service",
+        "description": "Indian multinational IT services and consulting company",
+        "logo": "https://logo.clearbit.com/tcs.com",
+        "rating": 3.8,
+        "reviews": 1200,
+        "hiring": 35000,
+        "questions": 800,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "tcs-aptitude",
+                "name": "Aptitude Test",
+                "duration": "90 mins",
+                "description": "Numerical, verbal and reasoning questions"
+            },
+            {
+                "id": "tcs-technical",
+                "name": "Technical Interview",
+                "duration": "45 mins",
+                "description": "Programming and computer science fundamentals"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Aptitude Preparation",
+                "content": "Focus on quantitative aptitude and logical reasoning"
+            }
+        ]
+    },
+    {
+        "id": "infosys",
+        "name": "Infosys",
+        "type": "service",
+        "description": "Indian multinational IT company",
+        "logo": "https://logo.clearbit.com/infosys.com",
+        "rating": 3.9,
+        "reviews": 1500,
+        "hiring": 28000,
+        "questions": 900,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "infosys-aptitude",
+                "name": "Aptitude Test",
+                "duration": "95 mins",
+                "description": "Quantitative and analytical questions"
+            },
+            {
+                "id": "infosys-technical",
+                "name": "Technical Interview",
+                "duration": "60 mins",
+                "description": "Coding and problem solving"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Technical Round",
+                "content": "Practice basic programming problems in your preferred language"
+            }
+        ]
+    },
+    
+    
+    {
+        "id": "google",
+        "name": "Google",
+        "type": "product",
+        "description": "Multinational technology company",
+        "logo": "https://logo.clearbit.com/google.com",
+        "rating": 4.8,
+        "reviews": 4500,
+        "hiring": 8000,
+        "questions": 3000,
+        "difficulty": "Very Hard",
+        "rounds": [
+            {
+                "id": "google-oa",
+                "name": "Online Assessment",
+                "duration": "90 mins",
+                "description": "2 coding problems"
+            },
+            {
+                "id": "google-technical",
+                "name": "Technical Interviews",
+                "duration": "45 mins each",
+                "description": "Data structures and algorithms"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Coding Preparation",
+                "content": "Master graph algorithms and dynamic programming"
+            }
+        ]
+    },
+    {
+        "id": "amazon",
+        "name": "Amazon",
+        "type": "product",
+        "description": "Multinational technology company",
+        "logo": "https://logo.clearbit.com/amazon.com",
+        "rating": 4.5,
+        "reviews": 3800,
+        "hiring": 15000,
+        "questions": 2500,
+        "difficulty": "Hard",
+        "rounds": [
+            {
+                "id": "amazon-oa",
+                "name": "Online Assessment",
+                "duration": "120 mins",
+                "description": "2 coding problems and work style assessment"
+            },
+            {
+                "id": "amazon-technical",
+                "name": "Technical Interviews",
+                "duration": "60 mins each",
+                "description": "Problem solving and system design"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Leadership Principles",
+                "content": "Prepare examples demonstrating Amazon's leadership principles"
+            }
+        ]
+    },
+    
+
+    {
+        "id": "wipro",
+        "name": "Wipro",
+        "type": "service",
+        "description": "Global IT, consulting and business process services company",
+        "logo": "https://logo.clearbit.com/wipro.com",
+        "rating": 3.9,
+        "reviews": 850,
+        "hiring": 22000,
+        "questions": 600,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "wipro-aptitude",
+                "name": "Aptitude Test",
+                "duration": "90 mins",
+                "description": "Quantitative, logical reasoning, and verbal ability"
+            },
+            {
+                "id": "wipro-essay",
+                "name": "Essay Writing",
+                "duration": "20 mins",
+                "description": "Short essay on given topic"
+            },
+            {
+                "id": "wipro-technical",
+                "name": "Technical Interview",
+                "duration": "45 mins",
+                "description": "Programming and CS fundamentals"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Essay Round",
+                "content": "Practice writing 200-250 word essays on technology trends"
+            }
+        ]
+    },
+    {
+        "id": "accenture",
+        "name": "Accenture",
+        "type": "service",
+        "description": "Global professional services company",
+        "logo": "https://logo.clearbit.com/accenture.com",
+        "rating": 4.1,
+        "reviews": 1100,
+        "hiring": 25000,
+        "questions": 700,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "accenture-cognitive",
+                "name": "Cognitive Assessment",
+                "duration": "60 mins",
+                "description": "Problem-solving and decision-making"
+            },
+            {
+                "id": "accenture-technical",
+                "name": "Technical Interview",
+                "duration": "60 mins",
+                "description": "Coding and system design"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Cognitive Test",
+                "content": "Practice abstract reasoning and pattern recognition"
+            }
+        ]
+    },
+    {
+        "id": "cognizant",
+        "name": "Cognizant",
+        "type": "service",
+        "description": "Multinational technology services and consulting company",
+        "logo": "https://logo.clearbit.com/cognizant.com",
+        "rating": 3.8,
+        "reviews": 900,
+        "hiring": 18000,
+        "questions": 550,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "cognizant-aptitude",
+                "name": "Aptitude Test",
+                "duration": "75 mins",
+                "description": "Numerical and verbal reasoning"
+            },
+            {
+                "id": "cognizant-technical",
+                "name": "Technical Interview",
+                "duration": "45 mins",
+                "description": "Problem-solving and programming concepts"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Technical Round",
+                "content": "Be prepared to explain basic programming concepts clearly"
+            }
+        ]
+    },
+    {
+        "id": "hcl",
+        "name": "HCL Technologies",
+        "type": "service",
+        "description": "Indian multinational IT services company",
+        "logo": "https://logo.clearbit.com/hcltech.com",
+        "rating": 3.7,
+        "reviews": 800,
+        "hiring": 15000,
+        "questions": 500,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "hcl-aptitude",
+                "name": "Aptitude Test",
+                "duration": "60 mins",
+                "description": "Logical and quantitative questions"
+            },
+            {
+                "id": "hcl-technical",
+                "name": "Technical Interview",
+                "duration": "60 mins",
+                "description": "Coding and technical knowledge"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Aptitude Preparation",
+                "content": "Focus on data interpretation and logical sequences"
+            }
+        ]
+    },
+    {
+        "id": "tech-mahindra",
+        "name": "Tech Mahindra",
+        "type": "service",
+        "description": "Indian multinational technology company",
+        "logo": "https://logo.clearbit.com/techmahindra.com",
+        "rating": 3.6,
+        "reviews": 750,
+        "hiring": 12000,
+        "questions": 450,
+        "difficulty": "Medium",
+        "rounds": [
+            {
+                "id": "techm-aptitude",
+                "name": "Aptitude Test",
+                "duration": "90 mins",
+                "description": "Quantitative and verbal ability"
+            },
+            {
+                "id": "techm-technical",
+                "name": "Technical Interview",
+                "duration": "45 mins",
+                "description": "Programming and problem-solving"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Communication Skills",
+                "content": "They value good communication along with technical skills"
+            }
+        ]
+    },
+    
+    {
+        "id": "microsoft",
+        "name": "Microsoft",
+        "type": "product",
+        "description": "Multinational technology corporation",
+        "logo": "https://logo.clearbit.com/microsoft.com",
+        "rating": 4.6,
+        "reviews": 2900,
+        "hiring": 6000,
+        "questions": 1800,
+        "difficulty": "Hard",
+        "rounds": [
+            {
+                "id": "microsoft-oa",
+                "name": "Online Assessment",
+                "duration": "120 mins",
+                "description": "2-3 coding problems"
+            },
+            {
+                "id": "microsoft-technical",
+                "name": "Technical Interviews",
+                "duration": "45 mins each",
+                "description": "DS/Algo and system design"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Coding Rounds",
+                "content": "Focus on graph algorithms and OOP concepts"
+            }
+        ]
+    },
+    {
+        "id": "apple",
+        "name": "Apple",
+        "type": "product",
+        "description": "Multinational technology company",
+        "logo": "https://logo.clearbit.com/apple.com",
+        "rating": 4.7,
+        "reviews": 3100,
+        "hiring": 5000,
+        "questions": 2000,
+        "difficulty": "Hard",
+        "rounds": [
+            {
+                "id": "apple-oa",
+                "name": "Online Assessment",
+                "duration": "90 mins",
+                "description": "2 coding problems and CS fundamentals"
+            },
+            {
+                "id": "apple-technical",
+                "name": "Technical Interviews",
+                "duration": "60 mins each",
+                "description": "In-depth problem solving and system design"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Interview Focus",
+                "content": "Expect questions about optimization and memory management"
+            }
+        ]
+    },
+    {
+        "id": "meta",
+        "name": "Meta",
+        "type": "product",
+        "description": "Social media and technology company",
+        "logo": "https://logo.clearbit.com/meta.com",
+        "rating": 4.5,
+        "reviews": 2800,
+        "hiring": 7000,
+        "questions": 2200,
+        "difficulty": "Hard",
+        "rounds": [
+            {
+                "id": "meta-oa",
+                "name": "Online Assessment",
+                "duration": "90 mins",
+                "description": "2 coding problems"
+            },
+            {
+                "id": "meta-technical",
+                "name": "Technical Interviews",
+                "duration": "45 mins each",
+                "description": "Data structures and algorithms"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Coding Preparation",
+                "content": "Focus on tree and graph traversal problems"
+            }
+        ]
+    },
+    {
+        "id": "netflix",
+        "name": "Netflix",
+        "type": "product",
+        "description": "Streaming entertainment service",
+        "logo": "https://logo.clearbit.com/netflix.com",
+        "rating": 4.8,
+        "reviews": 1200,
+        "hiring": 800,
+        "questions": 1500,
+        "difficulty": "Very Hard",
+        "rounds": [
+            {
+                "id": "netflix-technical",
+                "name": "Technical Interviews",
+                "duration": "60 mins each",
+                "description": "System design and coding challenges"
+            },
+            {
+                "id": "netflix-culture",
+                "name": "Culture Fit Interview",
+                "duration": "60 mins",
+                "description": "Alignment with company values"
+            }
+        ],
+        "tips": [
+            {
+                "title": "System Design",
+                "content": "Be prepared for deep discussions on scalability"
+            }
+        ]
+    },
+    {
+        "id": "adobe",
+        "name": "Adobe",
+        "type": "product",
+        "description": "Computer software company",
+        "logo": "https://logo.clearbit.com/adobe.com",
+        "rating": 4.4,
+        "reviews": 1800,
+        "hiring": 3000,
+        "questions": 1200,
+        "difficulty": "Hard",
+        "rounds": [
+            {
+                "id": "adobe-oa",
+                "name": "Online Assessment",
+                "duration": "90 mins",
+                "description": "Coding and CS fundamentals"
+            },
+            {
+                "id": "adobe-technical",
+                "name": "Technical Interviews",
+                "duration": "45 mins each",
+                "description": "Problem solving and system design"
+            }
+        ],
+        "tips": [
+            {
+                "title": "Problem Solving",
+                "content": "Practice dynamic programming and string manipulation problems"
+            }
+        ]
+    }
+]

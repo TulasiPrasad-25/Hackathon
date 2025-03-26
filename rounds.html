@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Questions | Jobzz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <h1>Jobzz</h1>
+            </div>
+            <nav class="user-nav">
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?background=4a6fa5&color=fff&name=User" alt="User" class="user-avatar">
+                    <span id="username-display">User</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </nav>
+        </header>
+        
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="fresher.html"><i class="fas fa-user-graduate"></i> Fresher</a></li>
+                    <li><a href="#"><i class="fas fa-user-tie"></i> Experienced</a></li>
+                    <li><a href="#"><i class="fas fa-user-ninja"></i> Expert</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Study Materials</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Progress Tracker</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="dashboard-main expanded">
+            <div class="page-header">
+                <a href="#" id="back-to-company" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Company</a>
+                <h2 id="round-name">Interview Questions</h2>
+                <p id="round-description">Loading questions...</p>
+            </div>
+            
+            <div class="questions-container">
+                <div class="questions-filter">
+                    <div class="filter-group">
+                        <label for="question-type">Filter by:</label>
+                        <select id="question-type">
+                            <option value="all">All Questions</option>
+                            <option value="technical">Technical</option>
+                            <option value="aptitude">Aptitude</option>
+                            <option value="reasoning">Reasoning</option>
+                            <option value="hr">HR</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="question-difficulty">Difficulty:</label>
+                        <select id="question-difficulty">
+                            <option value="all">All Levels</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                    <button class="filter-btn" id="apply-filter">Apply Filters</button>
+                </div>
+                
+                <div class="questions-list" id="questions-list">
+                    <!-- Questions will be loaded here from JavaScript -->
+                </div>
+                
+                <div class="pagination">
+                    <button class="pagination-btn" id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                    <span class="page-info" id="page-info">Page 1 of 1</span>
+                    <button class="pagination-btn" id="next-page" disabled>Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get company and round IDs from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const companyId = urlParams.get('company');
+            const roundId = urlParams.get('round');
+            
+            if (!companyId || !roundId) {
+                window.location.href = 'fresher.html';
+                return;
+            }
+            
+            // Set back button link
+            document.getElementById('back-to-company').href = `company.html?id=${companyId}`;
+            
+            // Load company and round data
+            Promise.all([
+                fetch('data/companies.json').then(res => res.json()),
+                fetch('data/questions.json').then(res => res.json())
+            ]).then(([companies, questions]) => {
+                const company = companies.find(c => c.id === companyId);
+                if (!company) {
+                    window.location.href = 'fresher.html';
+                    return;
+                }
+                
+                const round = company.rounds.find(r => r.id === roundId);
+                if (!round) {
+                    window.location.href = `company.html?id=${companyId}`;
+                    return;
+                }
+                
+                // Display round info
+                document.getElementById('round-name').textContent = `${company.name} - ${round.name} Questions`;
+                document.getElementById('round-description').textContent = round.description;
+                
+                // Filter questions for this company and round
+                let filteredQuestions = questions.filter(q => 
+                    q.companyId === companyId && q.roundId === roundId
+                );
+                
+                // Display questions
+                displayQuestions(filteredQuestions);
+                
+                // Filter functionality
+                document.getElementById('apply-filter').addEventListener('click', function() {
+                    const typeFilter = document.getElementById('question-type').value;
+                    const difficultyFilter = document.getElementById('question-difficulty').value;
+                    
+                    let newlyFiltered = questions.filter(q => 
+                        q.companyId === companyId && q.roundId === roundId
+                    );
+                    
+                    if (typeFilter !== 'all') {
+                        newlyFiltered = newlyFiltered.filter(q => q.type === typeFilter);
+                    }
+                    
+                    if (difficultyFilter !== 'all') {
+                        newlyFiltered = newlyFiltered.filter(q => q.difficulty === difficultyFilter);
+                    }
+                    
+                    filteredQuestions = newlyFiltered;
+                    currentPage = 1;
+                    displayQuestions(filteredQuestions);
+                });
+            });
+            
+            let currentPage = 1;
+            const questionsPerPage = 5;
+            
+            function displayQuestions(questions) {
+                const questionsList = document.getElementById('questions-list');
+                questionsList.innerHTML = '';
+                
+                if (questions.length === 0) {
+                    questionsList.innerHTML = '<div class="no-questions">No questions found matching your filters.</div>';
+                    document.getElementById('prev-page').disabled = true;
+                    document.getElementById('next-page').disabled = true;
+                    document.getElementById('page-info').textContent = 'Page 1 of 1';
+                    return;
+                }
+                
+                const startIndex = (currentPage - 1) * questionsPerPage;
+                const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+                const paginatedQuestions = questions.slice(startIndex, endIndex);
+                
+                paginatedQuestions.forEach(question => {
+                    const questionItem = document.createElement('div');
+                    questionItem.className = 'question-item';
+                    
+                    questionItem.innerHTML = `
+                        <div class="question-header">
+                            <h4>${question.title}</h4>
+                            <span class="question-meta">
+                                <span class="question-type ${question.type}">${question.type}</span>
+                                <span class="question-difficulty ${question.difficulty}">${question.difficulty}</span>
+                            </span>
+                        </div>
+                        <div class="question-content">
+                            <p>${question.question}</p>
+                            ${question.answer ? `
+                                <div class="answer-toggle">
+                                    <button class="toggle-btn">Show Answer <i class="fas fa-chevron-down"></i></button>
+                                    <div class="answer-content hidden">
+                                        <p>${question.answer}</p>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    
+                    questionsList.appendChild(questionItem);
+                });
+                
+                // Set up answer toggles
+                document.querySelectorAll('.toggle-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const answerContent = this.nextElementSibling;
+                        answerContent.classList.toggle('hidden');
+                        
+                        if (answerContent.classList.contains('hidden')) {
+                            this.innerHTML = 'Show Answer <i class="fas fa-chevron-down"></i>';
+                        } else {
+                            this.innerHTML = 'Hide Answer <i class="fas fa-chevron-up"></i>';
+                        }
+                    });
+                });
+                
+                // Update pagination controls
+                document.getElementById('prev-page').disabled = currentPage === 1;
+                document.getElementById('next-page').disabled = endIndex >= questions.length;
+                document.getElementById('page-info').textContent = `Page ${currentPage} of ${Math.ceil(questions.length / questionsPerPage)}`;
+                
+                // Pagination event listeners
+                document.getElementById('prev-page').addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayQuestions(filteredQuestions);
+                    }
+                });
+                
+                document.getElementById('next-page').addEventListener('click', function() {
+                    if (currentPage * questionsPerPage < filteredQuestions.length) {
+                        currentPage++;
+                        displayQuestions(filteredQuestions);
+                    }
+                });
+            }
+            
+            // Display current username
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('username-display').textContent = currentUser.username;
+            }
+            
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
